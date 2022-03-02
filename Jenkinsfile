@@ -30,7 +30,7 @@ pipeline {
               
             }
             }
-        stage(Package){
+        stage('Package'){
             input {
                 message "select the version to package"
                 ok "Version selected"
