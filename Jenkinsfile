@@ -34,8 +34,13 @@ pipeline {
             agent any            
            steps{
                 script{
+                    sshagent(['Test_server_Key']) {
+
                     echo "PACKAGING THE CODE"
-                    sh 'mvn package'                   
+                    sh "scp -o StrictHostkeyChecking=no server-script.sh ec2-user@172.31.38.164:/home/ec2-user"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.38.164 'bash ~/server-script.sh'"
+                    
+                    }                   
                 }
             }
         }         
